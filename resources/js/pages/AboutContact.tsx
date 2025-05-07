@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
+import axios from 'axios';
 
 export default function AboutContact() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<'success' | 'error' | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const formData = { name, email, message };
+      await axios.post('/contact', formData);
+      setStatus('success');
+      setName('');
+      setEmail('');
+      setMessage('');
+    } catch (error) {
+      setStatus('error');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-yellow-50 text-blue-900 flex flex-col justify-between">
-      
       {/* Header */}
       <header className="bg-yellow-400 px-10 md:px-20 py-6 shadow-md flex justify-between items-center sticky top-0 z-50">
         <h1 className="text-3xl font-extrabold text-blue-900 tracking-wide transform hover:scale-105 transition duration-300">
@@ -74,35 +93,69 @@ export default function AboutContact() {
 
             {/* Contact Form */}
             <form
-              method="POST"
-              action="/contact"
+              onSubmit={handleSubmit}
               className="md:w-1/2 bg-white bg-opacity-90 p-6 rounded-lg text-blue-900 shadow-md w-full"
             >
-              {/* CSRF Token */}
-              <input type="hidden" name="_token" value={(window as any).csrfToken} />
-
               <div className="mb-4">
                 <label className="block text-sm font-semibold mb-1">Name</label>
-                <input name="name" type="text" placeholder="Your Name" className="w-full p-2 rounded border focus:outline-none focus:ring-2 focus:ring-yellow-400" required />
+                <input
+                  name="name"
+                  type="text"
+                  placeholder="Your Name"
+                  className="w-full p-2 rounded border focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </div>
               <div className="mb-4">
                 <label className="block text-sm font-semibold mb-1">Email</label>
-                <input name="email" type="email" placeholder="you@example.com" className="w-full p-2 rounded border focus:outline-none focus:ring-2 focus:ring-yellow-400" required />
+                <input
+                  name="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  className="w-full p-2 rounded border focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
               <div className="mb-4">
                 <label className="block text-sm font-semibold mb-1">Message</label>
-                <textarea name="message" rows={3} placeholder="How can we help you?" className="w-full p-2 rounded border focus:outline-none focus:ring-2 focus:ring-yellow-400" required></textarea>
+                <textarea
+                  name="message"
+                  rows={3}
+                  placeholder="How can we help you?"
+                  className="w-full p-2 rounded border focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  required
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                ></textarea>
               </div>
-              <button type="submit" className="bg-yellow-400 hover:bg-yellow-500 transition px-4 py-2 font-semibold rounded w-full">Send</button>
+
+              <button type="submit" className="bg-yellow-400 hover:bg-yellow-500 transition px-4 py-2 font-semibold rounded w-full">
+                Send
+              </button>
+
+              {/* Styled Submission Feedback */}
+              {status === 'success' && (
+                <p className="mt-4 text-green-700 bg-green-100 border border-green-300 rounded px-4 py-2 text-sm shadow-sm">
+                  ✅ Your message has been sent successfully! We'll get back to you shortly.
+                </p>
+              )}
+              {status === 'error' && (
+                <p className="mt-4 text-red-700 bg-red-100 border border-red-300 rounded px-4 py-2 text-sm shadow-sm">
+                  ❌ Something went wrong. Please try again later.
+                </p>
+              )}
             </form>
           </motion.div>
-
         </div>
       </section>
 
       {/* Footer */}
       <footer className="bg-blue-900 text-yellow-100 text-center py-6 px-4">
-          <p className="text-sm">&copy; {new Date().getFullYear()} UltraCare Barbing Salon. All rights reserved.</p>
+        <p className="text-sm">&copy; {new Date().getFullYear()} UltraCare Barbing Salon. All rights reserved.</p>
       </footer>
     </div>
   );

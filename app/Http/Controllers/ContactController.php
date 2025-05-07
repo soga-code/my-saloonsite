@@ -4,24 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Validator;
 
 class ContactController extends Controller
 {
     public function send(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email',
+        $request->validate([
+            'name'    => 'required|string',
+            'email'   => 'required|email',
             'message' => 'required|string',
         ]);
 
-        Mail::raw($data['message'], function ($msg) use ($data) {
-            $msg->to('youremail@example.com')
-                ->subject('New Contact from ' . $data['name'])
-                ->replyTo($data['email']);
+        Mail::raw("Name: {$request->name}\nEmail: {$request->email}\nMessage: {$request->message}", function ($mail) use ($request) {
+            $mail->to('durojaiyesoga@gmail.com')
+                 ->from($request->email, $request->name)
+                 ->subject('New Contact Form Submission');
         });
 
-        return back()->with('success', 'Message sent!');
+        return response()->json(['success' => true, 'message' => 'Email sent successfully!']);
     }
 }
