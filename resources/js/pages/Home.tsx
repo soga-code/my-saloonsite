@@ -1,6 +1,8 @@
 import { Link } from '@inertiajs/react';
 import React from 'react';
-import HeroSection from '../components/HeroSection';
+import HeroSection from '../components/HeroSection'
+import MainSection from '@/components/MainSection';
+
 
 const Home: React.FC = () => {
     return (
@@ -27,11 +29,12 @@ const Home: React.FC = () => {
 
             <div className="min-h-screen bg-yellow-50 text-blue-900">
                 <HeroSection />
+                <MainSection />
             </div>
 
             <main>
                 {/* Why Choose Us Section */}
-                <section className="bg-yellow-400 px-6 py-20">
+                <section className="bg-yellow-100 px-6 py-20">
                     <div className="mx-auto max-w-6xl">
                         <h2 className="mb-6 text-center text-3xl font-extrabold tracking-tight text-blue-900">
                             Why Choose ✂️ Ultra<span className="rounded bg-blue-900 px-2 text-white">Care</span>?
@@ -58,7 +61,7 @@ const Home: React.FC = () => {
                                 href="/about-contact"
                                 className="mt-6 inline-block rounded bg-blue-900 px-6 py-2 font-semibold text-white transition hover:bg-blue-800"
                             >
-                                Contact Us
+                                About Us
                             </Link>
                         </div>
                     </div>

@@ -49,9 +49,9 @@ export default function AboutContact() {
           >
             <div className="md:w-1/2">
               <img
-                src="https://images.unsplash.com/photo-1588778492044-3d19cdaaf6c3?auto=format&fit=crop&w=800&q=80"
+                src="/images/Aboutimg.jpg"
                 alt="Barbers at work"
-                className="rounded-xl shadow-md w-full h-full object-cover"
+                className=" rounded-xl shadow-md w-250 h-180 object-cover"
               />
             </div>
             <div className="md:w-1/2 text-center md:text-left space-y-4">
@@ -84,7 +84,7 @@ export default function AboutContact() {
                 <h2 className="text-3xl font-bold mb-2">Get In Touch</h2>
                 <p className="mb-4 text-blue-100">Have a question or need a trim? We’re here for you!</p>
                 <ul className="space-y-2">
-                  <li><strong>📞 Phone:</strong> +234 815 9733 921</li>
+                  <a href='https://wa.me/+2348159733921' ><li><strong>📞 Phone:</strong> +234 815 9733 921</li></a>
                   <li><strong>📧 Email:</strong> durojaiyesoga@gmail.com</li>
                   <li><strong>📍 Address:</strong> Ogijo, Ogun State, Nigeria</li>
                 </ul>
