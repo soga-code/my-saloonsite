@@ -38,8 +38,9 @@ export default function MainSection() {
         </div>
       </section>
 
+
 {/* Hair Care Tips – Modern UI */}
-<section className="bg-white p-10 pt-20 rounded-xl shadow-lg max-w-6xl mx-auto text-center">
+<section className="bg-white p-10 pt-20 rounded-xl shadow-lg max-w-full mx-auto text-center">
   <h3 className="text-4xl font-extrabold text-blue-900 mb-6">🧴 Hair Care Made Simple</h3>
   <p className="text-blue-900 text-lg mb-10 max-w-2xl mx-auto">
     A fresh cut deserves lasting care. Follow these essentials to keep your hair healthy, stylish, and strong.
